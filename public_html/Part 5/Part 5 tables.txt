@@ -1,0 +1,55 @@
+create table Departments (
+    -> DepartmentID int not null,
+    -> Department_Name varchar(255),
+    -> Contact_Number int not null,
+    -> Website varchar(255),
+    -> primary key (DepartmentID));
+
+create table Students (
+    -> Student_ID int not null,
+    -> DepartmentID int,
+    -> First_name varchar(200),
+    -> Last_name varchar(200),
+    -> Phone_number int,
+    -> Username varchar(200),
+    -> Password varchar(200),
+    -> primary key (Student_ID),
+    -> foreign key (DepartmentID) references Departments(DepartmentID));
+
+create table Modules (
+    -> ModuleID int not null,
+    -> DepartmentID int,
+    -> ModuleName varchar(200),
+    -> Credits int,
+    -> semester varchar(200),
+    -> primary key (ModuleID),
+    -> foreign key (DepartmentID) references Departments(DepartmentID));
+
+create table Student_Module (
+    -> Student_ID int not null,
+    -> ModuleID int not null,
+    -> Marks int,
+    -> foreign key (Student_ID) references Students(Student_ID),
+    -> foreign key (ModuleID) references Modules(ModuleID),
+    -> constraint PK_Student_Module primary key (Student_ID, ModuleID));
+
+$sql = "INSERT INTO Departments (DepartmentID, Department_Name,Website,Contact_NB)
+VALUES (001, 'Computer Science', 'https://www.nottingham.ac.uk/computerscience/', ' 0115 951 4251')";
+
+
+$sql = "INSERT INTO Students (Student_ID, DepartmentID, First_Name, Last_Name, Username, Password)
+VALUES (001, 001, 'Himmy', 'Kong', 'psxchk', '1234')";
+
+if (mysqli_query($conn, $sql)) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
+
+$sql = "INSERT INTO Modules (ModuleID, DepartmentID, ModuleName, Credits, semester)
+VALUES (1002, 001, 'Programming', 20, 'Autumn')";
+
+$sql = "INSERT INTO Student_Module (Student_ID, ModuleID, Marks)
+VALUES (001, 001, 80)";
