@@ -3,10 +3,11 @@
 <head>
     <td width="30%" align="left"><img src="UniLogo.bmp" alt="UoN" border="0" hspace="0" vspace="0" height="80" width="160" align="center"></a></td>
 
-    <td width="43%" align="right"><img src="Harambe.jpg" alt="ASAP" border="0" hspace="0" vspace="0" width="160" align="right"></a></td>
-
+    <td width="43%" align="right"><img src="penguins2.jpg" alt="ASAP" border="0" hspace="0" vspace="0" width="160" align="right"></a></td>
+    
 </head>
 <link rel="stylesheet" href="ButtonStyles.css">
+<link rel="stylesheet" href="Table.css">
 <?php
   require "connect.php";
  
@@ -26,9 +27,9 @@
   <a href="Login.php">Log out</a>
 </div>
 <br>
-<p><img src="Harambe.jpg" alt="" style="width:170px;height:250px;margin-left:100px;" ></p>
+<p><img src="penguin.jpg" alt="" style="width:170px;height:250px;margin-left:0px;" ></p>
 <br>
-<div class="absolute">
+<div>
   <?php
       session_start();
       $Student_ID = $_SESSION['Student_ID'];
@@ -40,31 +41,33 @@
       }
 
       While($row = mysqli_fetch_array($result)){
-        echo "--------------------------------<br>";
+        echo "----------------------------------------------------------<br>";
         echo  "Name: {$row['First_name']} {$row['Last_name']} <br>".
-        "--------------------------------<br>";
+        "----------------------------------------------------------<br>";
         echo  "Student Number : {$row['Student_ID']} <br>".
-        "--------------------------------<br>";
+        "----------------------------------------------------------<br>";
         $Department_ID = $row['DepartmentID'];
         $sql2 = "SELECT * FROM Departments WHERE DepartmentID = '$Department_ID'";
         $result2 = mysqli_query($conn,$sql2);
         While($row = mysqli_fetch_array($result2)){
         
           echo  "Student's Department: {$row['Department_Name']} <br>".
-          "--------------------------------<br>";
+          "----------------------------------------------------------<br>";
         
 
 
           
           #echo "Username :{$row['Username']}  <br> ".
-          #"--------------------------------<br>";
+          #"----------------------------------------------------------<br>";
           #echo "Password :{$row['Password']}  <br> ".
-          #"--------------------------------<br>";
+          #"----------------------------------------------------------<br>";
         }
       }
     ?>
 </div>
-   
+<div id = "BottomRight">
+    <a href = "Help.php">Help? Click here</a>
+  </div>
 
 </body>
 </html> 

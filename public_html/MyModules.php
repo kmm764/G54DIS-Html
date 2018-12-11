@@ -3,11 +3,12 @@
         <head>
                 <td width="30%" align="left"><img src="UniLogo.bmp" alt="UoN" border="0" hspace="0" vspace="0" height="80" width="160" align="center"></a></td>
             
-                <td width="43%" align="right"><img src="Harambe.jpg" alt="ASAP" border="0" hspace="0" vspace="0" width="160" align="right"></a></td>
+                <td width="43%" align="right"><img src="penguins2.jpg" alt="ASAP" border="0" hspace="0" vspace="0" width="160" align="right"></a></td>
             
         </head>
 
 <link rel="stylesheet" href="ButtonStyles.css">
+<link rel="stylesheet" href="Table.css">
 <?php
 require "connect.php";
 ?>
@@ -23,15 +24,16 @@ require "connect.php";
   <a href="Login.php">Log out</a>
 </div>
 <?php
-        echo '<table align="left"
+        echo '<table id = "Tables" align="left"
 
                 cellspacing="5" cellpadding="8">
-                <tr></td>
-                <td align="left"><b>Code</b></td>
-                <td align="left"><b>Title</b></td>
-                <td align="left"><b>Credit</b></td>
-                <td align="left"><b>Semester</b></td>
-                <td align="left"><b>Department</b></td></tr>';
+                <tr>
+                <th align="left"><b>Code</b></th>
+                <th align="left"><b>Title</b></th>
+                <th align="left"><b>Credit</b></th>
+                <th align="left"><b>Semester</b></th>
+                <th align="left"><b>Department</b></th>
+                </tr>';
 
         session_start();
         $Student_ID = $_SESSION['Student_ID'];
@@ -44,18 +46,19 @@ require "connect.php";
                 $result2 = mysqli_query($conn,$sql2);
                 While($row = mysqli_fetch_array($result2)){
         
-                        echo '<tr><td align="left"cellspacing="5" cellpadding="8">' .
-                                $row['ModuleID'] . '</td><td align="left">' .
-                                $row['ModuleName'] . '</td><td align="left">' .
-                                $row['Credits'] . '</td><td align="left">' .
-                                $row['semester'] . '</td><td align="left">' ;
-                                #$row['DepartmentID'] . '</td><td align="left">';
+                        echo '<tr>
+                                <td>' .$row['ModuleID'] . '</td>
+                                <td align="left">' .$row['ModuleName'] . '</td>
+                                <td align="left">' .$row['Credits'] . '</td>
+                                <td align="left">' .$row['semester'] . '</td>
+                                <td align="left">';
                         $Department_ID = $row['DepartmentID'];
                         $sql3 = "SELECT * FROM Departments WHERE DepartmentID = '$Department_ID'";
                         $result3 = mysqli_query($conn,$sql3);
                         While($row = mysqli_fetch_array($result3)) {
                                 echo $row['Department_Name' ];
                         }
+                        
                         
         
 
@@ -69,6 +72,9 @@ require "connect.php";
         }
 
 ?>
+<div id = "BottomRight">
+    <a href = "Help.php">Help? Click here</a>
+  </div>
 
 
 </body>
